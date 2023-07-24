@@ -34,12 +34,14 @@ const Navigation = ({ user }) => {
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
+                                active={router.pathname.includes('/dashboard')}>
                                 Dashboard
                             </NavLink>
                             <NavLink
                                 href="/subscriptions"
-                                active={router.pathname === '/subscriptions'}>
+                                active={router.pathname.includes(
+                                    '/subscriptions',
+                                )}>
                                 Subscriptions
                             </NavLink>
                         </div>

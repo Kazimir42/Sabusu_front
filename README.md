@@ -11,7 +11,7 @@ This repository is an implementation of the [Laravel Breeze](https://laravel.com
 First, create a Next.js compatible Laravel backend by installing Laravel Breeze into a [fresh Laravel application](https://laravel.com/docs/installation) and installing Breeze's API scaffolding:
 
 ```bash
-# Create the Laravel application...
+# Add the Laravel application...
 laravel new next-backend
 
 cd next-backend

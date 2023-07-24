@@ -2,12 +2,14 @@ import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useAuth } from '@/hooks/auth'
+import Container from '@/components/Container'
+import Item from '@/components/Pages/Subscriptions/Item'
+import Loader from '@/components/Loader'
+import NewItem from "@/components/Pages/Subscriptions/NewItem";
 
-const Subscriptions = () => {
+const Index = () => {
     const [subscriptions, setSubscriptions] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const { token } = useAuth()
 
     useEffect(() => {
         fetchSubscriptions()
@@ -36,28 +38,17 @@ const Subscriptions = () => {
 
     function DisplaySubscriptions() {
         return (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
                 {subscriptions ? (
                     subscriptions.map((subscription, index) => (
-                        <div
-                            key={index}
-                            className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="p-6 bg-white border-b border-gray-200 flex flex-col gap-2">
-                                <p>Title : {subscription.title}</p>
-                                <p>Frequency : {subscription.frequency}</p>
-                                <p>Cost : {subscription.cost}€</p>
-                            </div>
-                        </div>
+                        <Item key={index} subscription={subscription} />
                     ))
                 ) : (
                     <p>No subscriptions</p>
                 )}
+                <NewItem />
             </div>
         )
-    }
-
-    function Loader() {
-        return <div>LOADING</div>
     }
 
     return (
@@ -71,13 +62,11 @@ const Subscriptions = () => {
                 <title>Sabusu - Subscriptions</title>
             </Head>
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {!isLoading ? <DisplaySubscriptions /> : <Loader />}
-                </div>
-            </div>
+            <Container>
+                {!isLoading ? <DisplaySubscriptions /> : <Loader />}
+            </Container>
         </AppLayout>
     )
 }
 
-export default Subscriptions
+export default Index
