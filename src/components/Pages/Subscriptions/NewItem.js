@@ -8,12 +8,12 @@ function NewItem(props) {
         <Link href="/subscriptions/add">
             <Block
                 key={props.index}
-                className="h-32 grid grid-cols-12 border-4 border-dashed border-gray-300 bg-transparent shadow-none">
+                className="h-32 grid grid-cols-12 border-4 border-dashed border-primary-light bg-transparent shadow-none">
                 <div className="p-6 col-span-2 mx-auto my-auto">
-                    <Plus className={'h-12 w-12 text-gray-400'} />
+                    <Plus className={'h-12 w-12 text-primary-light'} />
                 </div>
                 <div className="p-6 flex flex-col gap-2 col-span-10 justify-center">
-                    <p className="font-bold text-2xl text-gray-400">
+                    <p className="font-bold text-2xl text-primary-light">
                         Add new subscription
                     </p>
                 </div>
