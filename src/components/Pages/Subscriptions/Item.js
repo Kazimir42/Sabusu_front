@@ -22,7 +22,7 @@ function Item(props) {
                     href={`/subscriptions/${props.subscription.id}`}
                     className={'block'}>
                     <Eye
-                        className={'!h-10 !w-10 text-gray-700 cursor-pointer'}
+                        className={'!h-10 !w-10 text-primary-light cursor-pointer'}
                     />
                 </Link>
             </div>
