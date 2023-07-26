@@ -11,7 +11,7 @@ function Item(props) {
             </div>
             <div className="p-6 flex flex-col gap-2 col-span-8 justify-between">
                 <p className="text-gray-600">
-                    category {props.subscription.title}
+                    {props.subscription.category.title} | {props.subscription.supplier.title}
                 </p>
                 <p className="font-bold text-2xl">
                     {props.subscription.cost}€ /{props.subscription.frequency}
@@ -22,7 +22,9 @@ function Item(props) {
                     href={`/subscriptions/${props.subscription.id}`}
                     className={'block'}>
                     <Eye
-                        className={'!h-10 !w-10 text-primary-light cursor-pointer'}
+                        className={
+                            '!h-10 !w-10 text-primary-light cursor-pointer'
+                        }
                     />
                 </Link>
             </div>

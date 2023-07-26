@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Container(props) {
+function Block(props) {
     return (
-        <div className={'bg-white overflow-hidden shadow-md rounded-xl ' + props.className}>
+        <div onClick={props.onClick} className={'bg-white overflow-hidden shadow-md rounded-xl ' + props.className}>
             {props.children}
         </div>
     )
 }
 
-export default Container
+export default Block

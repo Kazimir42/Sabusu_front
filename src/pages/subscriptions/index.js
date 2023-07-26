@@ -1,40 +1,19 @@
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import Container from '@/components/Container'
 import Item from '@/components/Pages/Subscriptions/Item'
 import Loader from '@/components/Loader'
-import NewItem from "@/components/Pages/Subscriptions/NewItem";
+import NewItem from '@/components/Pages/Subscriptions/NewItem'
+import { fetchSubscriptions } from '@/api/subscriptions'
 
 const Index = () => {
     const [subscriptions, setSubscriptions] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetchSubscriptions()
+        fetchSubscriptions().then(setSubscriptions).then(setIsLoading)
     }, [])
-
-    function fetchSubscriptions() {
-        axios
-            .get('http://localhost/api/subscriptions', {
-                withCredentials: true, // Autorise l'envoi des cookies lors de la requête (important pour les requêtes CORS avec des cookies d'authentification)
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'http://localhost:3000', // Remplacez par l'URL de votre application Next.js
-                },
-            })
-            .then(response => {
-                setSubscriptions(response.data)
-                setIsLoading(false)
-            })
-            .catch(error => {
-                console.error(
-                    'Erreur lors de la récupération des souscriptions :',
-                    error,
-                )
-            })
-    }
 
     function DisplaySubscriptions() {
         return (
