@@ -5,12 +5,10 @@ import Head from 'next/head'
 import Container from '@/components/Container'
 import Loader from '@/components/Loader'
 import { fetchCategories } from '@/api/categories'
-import Block from '@/components/Block'
 import H2 from '@/components/H2'
 import { fetchSuppliers } from '@/api/suppliers'
-import Subscriptions from '@/pages/subscriptions/index'
 import BlockButton from '@/components/BlockButton'
-import { frequencies, frequencyEnum, MONTHLY } from '@/enums/frequencies'
+import { frequencyEnum } from '@/enums/frequencies'
 import H3 from '@/components/H3'
 import Input from '@/components/Input'
 
@@ -85,7 +83,7 @@ function Add() {
         return (
             <div>
                 <H2 className={'mb-4'}>Complete your subscription</H2>
-                <div className={'flex flex-col gap-4'}>
+                <div className={'flex flex-col gap-8'}>
                     <div>
                         <H3 className={'mb-2'}>Frequency</H3>
                         <div className="grid grid-cols-4 gap-4">
@@ -95,7 +93,7 @@ function Add() {
                                         key={frequency}
                                         onClick={() =>
                                             setSelectedFrequency(frequency)
-                                        }>
+                                        } className={selectedFrequency === frequency ? 'border-2 border-primary' : null}>
                                         <img className="h-24 w-24 bg-primary" />
                                         {frequencyEnum[frequency].title}
                                     </BlockButton>
@@ -103,9 +101,31 @@ function Add() {
                             })}
                         </div>
                     </div>
-                    <div>
-                        <H3 clasName={'mb-2'}>Frequency</H3>
-                        <Input className={'p-2'} />
+                    <div className={'grid grid-cols-2 gap-4 flex-grow'}>
+                        <div className={'col-span-1 flex flex-col gap-4'}>
+                            <div>
+                                <H3 clasName={'mb-2'}>Title</H3>
+                                <p className='text-gray-500'>I'm a little desc</p>
+                                <Input className={'p-3 bg-transparent border shadow-none'} />
+                            </div>
+                            <div>
+                                <H3 clasName={'mb-2'}>Amount</H3>
+                                <p className='text-gray-500'>I'm a little desc</p>
+                                <div className={'text-lg'}><Input className={'p-3 bg-transparent border shadow-none'} /> €/{selectedFrequency ? frequencyEnum[selectedFrequency].title : null}</div>
+                            </div>
+                        </div>
+                        <div className={'col-span-1 flex flex-col gap-4'}>
+                            <div>
+                                <H3 clasName={'mb-2'}>Subscription date</H3>
+                                <p className='text-gray-500'>I'm a little desc</p>
+                                <Input type={'date'} className={'p-3 bg-transparent border shadow-none'} />
+                            </div>
+                            <div>
+                                <H3 clasName={'mb-2'}>Next payment date</H3>
+                                <p className='text-gray-500'>I'm a little desc</p>
+                                <Input type={'date'} className={'p-3 bg-transparent border shadow-none'} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
