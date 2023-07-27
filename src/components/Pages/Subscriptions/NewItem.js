@@ -1,25 +1,23 @@
-import React from 'react'
-import Block from '@/components/Block'
-import Plus from '@/components/Svg/Plus'
-import Link from 'next/link'
+import React from "react";
+import Plus from "@/components/Svg/Plus";
+import Link from "next/link";
+import BlockButton from "@/components/BlockButton";
 
 function NewItem(props) {
     return (
         <Link href="/subscriptions/add">
-            <Block
-                key={props.index}
-                className="h-32 grid grid-cols-12 border-4 border-dashed border-primary-light bg-transparent shadow-none">
-                <div className="p-6 col-span-2 mx-auto my-auto">
-                    <Plus className={'h-12 w-12 text-primary-light'} />
+            <BlockButton class=" border-dashed border-primary-light w-full grid grid-cols-12 border-2">
+                <div className=" col-span-2 mx-auto my-auto">
+                    <Plus class={"h-12 w-12 text-primary-light"} />
                 </div>
-                <div className="p-6 flex flex-col gap-2 col-span-10 justify-center">
-                    <p className="font-bold text-2xl text-primary-light">
+                <div className=" flex flex-col gap-2 col-span-10 justify-center">
+                    <p className=" font-bold text-2xl text-primary-light text-left">
                         Add new subscription
                     </p>
                 </div>
-            </Block>
+            </BlockButton>
         </Link>
-    )
+    );
 }
 
-export default NewItem
+export default NewItem;

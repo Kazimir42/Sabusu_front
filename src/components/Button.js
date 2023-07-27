@@ -1,9 +1,12 @@
-const Button = ({ type = 'submit', className, ...props }) => (
-    <button
-        type={type}
-        className={`${className} inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150`}
-        {...props}
-    />
-)
+import React from "react";
 
-export default Button
+function Button(props) {
+    return (<button
+        type={props.type}
+        onClick={props.onClick}
+        className={"inline-flex items-center px-4 py-2 bg-primary border border-transparent rounded-md font-semibold text-white hover:bg-primary-dark disabled:opacity-25 transition ease-in-out duration-200 " + props.class}>
+        {props.children}
+    </button>);
+}
+
+export default Button;

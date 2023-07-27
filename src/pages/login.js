@@ -1,49 +1,49 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
-import AuthCard from '@/components/AuthCard'
-import AuthSessionStatus from '@/components/AuthSessionStatus'
-import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
-import Input from '@/components/Input'
-import InputError from '@/components/InputError'
-import Label from '@/components/Label'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import ApplicationLogo from "@/components/ApplicationLogo";
+import AuthCard from "@/components/AuthCard";
+import AuthSessionStatus from "@/components/AuthSessionStatus";
+import Button from "@/components/Button";
+import GuestLayout from "@/components/Layouts/GuestLayout";
+import Input from "@/components/Input";
+import InputError from "@/components/InputError";
+import Label from "@/components/Label";
+import Link from "next/link";
+import { useAuth } from "@/hooks/auth";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Login = () => {
-    const router = useRouter()
+    const router = useRouter();
 
     const { login } = useAuth({
-        middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
-    })
+        middleware: "guest",
+        redirectIfAuthenticated: "/dashboard"
+    });
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [shouldRemember, setShouldRemember] = useState(false);
+    const [errors, setErrors] = useState([]);
+    const [status, setStatus] = useState(null);
 
     useEffect(() => {
         if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset))
+            setStatus(atob(router.query.reset));
         } else {
-            setStatus(null)
+            setStatus(null);
         }
-    })
+    });
 
     const submitForm = async event => {
-        event.preventDefault()
+        event.preventDefault();
 
         login({
             email,
             password,
             remember: shouldRemember,
             setErrors,
-            setStatus,
-        })
-    }
+            setStatus
+        });
+    };
 
     return (
         <GuestLayout>
@@ -65,7 +65,7 @@ const Login = () => {
                             id="email"
                             type="email"
                             value={email}
-                            className="block mt-1 w-full"
+                            class="block mt-1 w-full"
                             onChange={event => setEmail(event.target.value)}
                             required
                             autoFocus
@@ -82,7 +82,7 @@ const Login = () => {
                             id="password"
                             type="password"
                             value={password}
-                            className="block mt-1 w-full"
+                            class="block mt-1 w-full"
                             onChange={event => setPassword(event.target.value)}
                             required
                             autoComplete="current-password"
@@ -115,7 +115,7 @@ const Login = () => {
                         </label>
                     </div>
 
-                    <div className="flex items-center justify-end mt-4">
+                    <div className="flex items-center justify-end mt-4 gap-2">
                         <Link
                             href="/forgot-password"
                             className="underline text-sm text-gray-600 hover:text-gray-900">
@@ -127,7 +127,7 @@ const Login = () => {
                 </form>
             </AuthCard>
         </GuestLayout>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;
