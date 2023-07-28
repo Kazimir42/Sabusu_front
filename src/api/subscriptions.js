@@ -20,6 +20,23 @@ export function fetchSubscriptions() {
         });
 }
 
+export function fetchSubscription(id) {
+    return axios
+        .get("http://localhost/api/subscriptions/" + id, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:3000"
+            }
+        })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
 export function createSubscription(subscription) {
     const token = getApiTokenFromCookie(); // Remplacez getApiTokenFromCookie() par la fonction pour obtenir le jeton API du cookie
 
