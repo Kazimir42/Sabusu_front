@@ -7,7 +7,7 @@ function Input(props) {
         onChange={props.onChange}
         value={props.value}
         required={props.required}
-        className={"rounded-md shadow-sm border-gray-300 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 " + props.class}
+        className={"rounded-md shadow-sm border-gray-300 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 " + props.className}
     />);
 }
 

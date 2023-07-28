@@ -2,7 +2,6 @@ import useSWR from 'swr'
 import axios from '@/lib/axios'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
@@ -43,12 +42,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         axios
             .post('/login', props)
-            .then(response => {
-                const token = response.data.token
-                Cookies.set('authToken', token)
-
-                mutate()
-            })
+            .then(() => mutate())
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -97,20 +91,12 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }
 
     const logout = async () => {
-        Cookies.remove('authToken');
-
         if (!error) {
             await axios.post('/logout').then(() => mutate())
         }
 
         window.location.pathname = '/login'
     }
-
-    const getTokenFromCookie = () => {
-        return Cookies.get('authToken') || null
-    }
-
-    const token = getTokenFromCookie()
 
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user)
@@ -124,7 +110,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }, [user, error])
 
     return {
-        token,
         user,
         register,
         login,

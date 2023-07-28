@@ -6,9 +6,9 @@ import BlockButton from "@/components/BlockButton";
 function NewItem(props) {
     return (
         <Link href="/subscriptions/add">
-            <BlockButton class=" border-dashed border-primary-light w-full grid grid-cols-12 border-2">
+            <BlockButton className=" border-dashed border-primary-light w-full grid grid-cols-12 border-2">
                 <div className=" col-span-2 mx-auto my-auto">
-                    <Plus class={"h-12 w-12 text-primary-light"} />
+                    <Plus className={"h-12 w-12 text-primary-light"} />
                 </div>
                 <div className=" flex flex-col gap-2 col-span-10 justify-center">
                     <p className=" font-bold text-2xl text-primary-light text-left">

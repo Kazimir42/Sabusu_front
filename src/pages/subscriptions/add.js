@@ -8,11 +8,13 @@ import { fetchSuppliers } from "@/api/suppliers";
 import SubscriptionForm from "@/components/Pages/Subscriptions/SubscriptionForm";
 import SupplierSelector from "@/components/Pages/Subscriptions/SupplierSelector";
 import CategorySelector from "@/components/Pages/Subscriptions/CategorySelector";
+import { createSubscription } from "@/api/subscriptions";
+import { useRouter } from "next/router";
 
 function Add() {
     const [categories, setCategories] = useState([]);
     const [suppliers, setSuppliers] = useState([]);
-    const [frequencies, setFrequencies] = useState([1, 2, 3, 4]);
+    const [frequencies] = useState([1, 2, 3, 4]);
 
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSupplier, setSelectedSupplier] = useState(null);
@@ -23,6 +25,8 @@ function Add() {
     const [paymentAt, setPaymentAt] = useState("");
 
     const [isLoading, setIsLoading] = useState(true);
+
+    const router = useRouter()
 
     useEffect(() => {
         fetchCategories()
@@ -42,6 +46,18 @@ function Add() {
     function handleFormSubmit(event) {
         event.preventDefault();
 
+        const subscription = {
+            category_id: selectedCategory.id,
+            supplier_id: selectedSupplier.id,
+            frequency: selectedFrequency,
+            title: title,
+            amount: amount,
+            subscribed_at: subscribedAt,
+            payment_at: paymentAt,
+        }
+
+        createSubscription(subscription)
+            .then(() => router.push('/dashboard'))
     }
 
     return (<AppLayout

@@ -8,7 +8,7 @@ function Eye(props) {
             viewBox="0 0 24 24"
             strokeWidth={1}
             stroke="currentColor"
-            className={'w-6 h-6 ' + props.class}>
+            className={'w-6 h-6 ' + props.className}>
             <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
