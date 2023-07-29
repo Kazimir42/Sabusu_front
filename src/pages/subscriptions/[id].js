@@ -35,7 +35,7 @@ function Id() {
                 <div className={"flex flex-row gap-8"}>
                     <div className=" ">
                         <img
-                            className="h-64 w-64 inline" src={API_ROUTE + subscription.supplier.medias[0]?.path}
+                            className="h-40 w-40 md:h-64 md:w-64 inline" src={API_ROUTE + subscription.supplier.medias[0]?.path}
                             alt={subscription.supplier.medias[0]?.title}
                         />
                     </div>
@@ -51,7 +51,7 @@ function Id() {
                             </p>
                         </div>
                         <H1>{subscription?.title}</H1>
-                        <p className="col-span-2 font-bold text-2xl text-primary-light">
+                        <p className="col-span-2 font-bold text-2xl text-primary">
                             {subscription?.amount}€ /
                             {frequencyEnum[subscription?.frequency].title}
                         </p>

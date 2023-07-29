@@ -17,7 +17,7 @@ function SupplierSelector(props) {
             <H2>Choose the right supplier</H2>
             <Button type={'button'} onClick={() => back()}>{'<'} Back</Button>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {props.suppliers.map(supplier => (<BlockButton
                 key={supplier.id}
                 onClick={() => props.setSelectedSupplier(supplier)}>

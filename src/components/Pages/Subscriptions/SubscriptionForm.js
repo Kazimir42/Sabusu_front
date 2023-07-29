@@ -22,7 +22,7 @@ function SubscriptionForm(props) {
             <div className="flex flex-col gap-8">
                 <div>
                     <H3 className="mb-2">Frequency</H3>
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {props.frequencies.map(frequency => (<BlockButton
                             key={frequency}
                             onClick={() => props.setSelectedFrequency(frequency)}
@@ -38,7 +38,7 @@ function SubscriptionForm(props) {
                 </div>
                 <div className="grid grid-cols-2 gap-4 flex-grow">
                     <div className="col-span-1 flex flex-col gap-4">
-                        <div className="w-1/2">
+                        <div className="md:w-1/2">
                             <H3 className="mb-2 w-full">Title</H3>
                             <p className="text-gray-500 w-full">
                                 I'm a little desc
@@ -50,7 +50,7 @@ function SubscriptionForm(props) {
                                 onChange={event => props.setTitle(event.target.value)}
                             />
                         </div>
-                        <div className="w-1/2">
+                        <div className="md:w-1/2">
                             <H3 className="mb-2 w-full">Amount</H3>
                             <p className="text-gray-500 w-full">
                                 I'm a little desc
@@ -68,7 +68,7 @@ function SubscriptionForm(props) {
                         </div>
                     </div>
                     <div className="col-span-1 flex flex-col gap-4">
-                        <div className="w-1/2">
+                        <div className="md:w-1/2">
                             <H3 className="mb-2 w-full">Subscription date</H3>
                             <p className="text-gray-500 w-full">
                                 I'm a little desc
@@ -80,7 +80,7 @@ function SubscriptionForm(props) {
                                 onChange={event => props.setSubscribedAt(event.target.value)}
                             />
                         </div>
-                        <div className="w-1/2">
+                        <div className="md:w-1/2">
                             <H3 className="mb-2 w-full">Next payment date</H3>
                             <p className="text-gray-500 w-full">
                                 I'm a little desc

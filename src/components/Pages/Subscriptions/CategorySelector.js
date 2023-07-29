@@ -15,7 +15,7 @@ function CategorySelector(props) {
             <H2>Choose the right category</H2>
             <Button type={'button'} onClick={() => back()}>{'<'} Back</Button>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {props.categories.map(category => (<BlockButton
                 key={category.id}
                 onClick={() => props.setSelectedCategory(category)}>
