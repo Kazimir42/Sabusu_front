@@ -37,13 +37,13 @@ function Add() {
     }, []);
 
     useEffect(() => {
-        if (selectedCategory) {
+        if (selectedCategory || currentPage === 2) {
             setIsLoading(true);
             fetchSuppliers(selectedCategory.id)
                 .then(setSuppliers)
                 .then(() => setIsLoading(false));
         }
-    }, [selectedCategory]);
+    }, [selectedCategory, currentPage]);
 
 
     useEffect(() => {

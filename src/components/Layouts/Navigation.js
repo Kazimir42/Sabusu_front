@@ -71,6 +71,9 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
                             {/* Authentication */}
+                            <DropdownButton onClick={() => router.push('/my-profile')}>
+                                My profile
+                            </DropdownButton>
                             <DropdownButton onClick={logout}>
                                 Logout
                             </DropdownButton>

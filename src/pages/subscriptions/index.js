@@ -16,9 +16,9 @@ const Index = () => {
 
     useEffect(() => {
         fetchSubscriptions().then((result) => {
-            setSubscriptions(result.subscriptions);
-            setTotalMonthlyCost(result.total_monthly_cost);
-            setMostExpensiveCategory(result.most_expensive_category);
+            setSubscriptions(result?.subscriptions);
+            setTotalMonthlyCost(result?.total_monthly_cost);
+            setMostExpensiveCategory(result?.most_expensive_category);
         }).then(setIsLoading);
     }, []);
 
@@ -29,9 +29,7 @@ const Index = () => {
                     subscriptions.map((subscription, index) => (
                         <Item key={index} subscription={subscription} />
                     ))
-                ) : (
-                    <p>No subscriptions</p>
-                )}
+                ) : null}
                 <NewItem />
             </div>
         );
@@ -39,21 +37,24 @@ const Index = () => {
 
     function Statistiques() {
         return (
-            <div className={'grid grid-cols-2 md:grid-cols-3 gap-4 mb-4'}>
-                <Block className={'col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8'}>
-                    <p className={'font-bold text-primary text-6xl md:text-7xl'}>{subscriptions.length}</p>
+            <div className={"grid grid-cols-2 md:grid-cols-3 gap-4 mb-4"}>
+                <Block
+                    className={"col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8"}>
+                    <p className={"font-bold text-primary text-6xl md:text-7xl"}>{subscriptions?.length ?? 0}</p>
                     <p>Subscriptions</p>
                 </Block>
-                <Block className={'col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8'}>
-                    <p className={'font-bold text-primary text-6xl md:text-7xl'}>{totalMonthlyCost}€</p>
+                <Block
+                    className={"col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8"}>
+                    <p className={"font-bold text-primary text-6xl md:text-7xl"}>{totalMonthlyCost ?? 0}€</p>
                     <p>Monthly cost</p>
                 </Block>
-                <Block className={'col-span-2 md:col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8'}>
-                    <p className={'font-bold text-primary text-3xl md:text-3xl lg:text-4xl xl:text-5xl'}>{mostExpensiveCategory.title}</p>
+                <Block
+                    className={"col-span-2 md:col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8"}>
+                    <p className={"font-bold text-primary text-3xl md:text-3xl lg:text-4xl xl:text-5xl"}>{mostExpensiveCategory?.title ?? 'None'}</p>
                     <p>Most expensive category</p>
                 </Block>
             </div>
-        )
+        );
     }
 
     return (

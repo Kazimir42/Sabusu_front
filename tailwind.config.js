@@ -9,7 +9,6 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                //todo : Add mimi theme
                 primary: {
                     DEFAULT: '#f43f5e',
                     dark: '#e11d48',
@@ -17,7 +16,10 @@ module.exports = {
                     verylight: '#fda4af',
                 },
                 secondary: {
-                    DEFAULT: '#FFD100',
+                    DEFAULT: '#444',
+                    dark: '#333',
+                    light: '#555',
+                    verylight: '#666',
                 },
                 danger: {
                     DEFAULT: '#FF3030',

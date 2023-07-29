@@ -4,10 +4,12 @@ import Head from "next/head";
 import Container from "@/components/Container";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
-import { fetchSubscription } from "@/api/subscriptions";
+import { deleteSubscription, fetchSubscription } from "@/api/subscriptions";
 import { frequencyEnum } from "@/enums/frequencies";
 import H1 from "@/components/H1";
 import { API_ROUTE } from "@/api/api";
+import Button from "@/components/Button";
+import DeleteModal from "@/components/Pages/DeleteModal";
 
 function Id() {
     const [subscription, setSubscription] = useState(null);
@@ -19,6 +21,16 @@ function Id() {
             fetchSubscription(router.query.id).then(setSubscription).then(setIsLoading);
         }
     }, [router.query.id]);
+
+    useEffect(() => {
+        if (router.query.showDeleteModal) {
+            console.log(router.query.showDeleteModal);
+        }
+    }, [router.query.showDeleteModal]);
+
+    function destroy() {
+        deleteSubscription(router.query.id).then(() => router.push("/subscriptions"));
+    }
 
     return (
         <AppLayout
@@ -35,7 +47,8 @@ function Id() {
                 <div className={"flex flex-row gap-8"}>
                     <div className=" ">
                         <img
-                            className="h-40 w-40 md:h-64 md:w-64 inline" src={API_ROUTE + subscription.supplier.medias[0]?.path}
+                            className="h-40 w-40 md:h-64 md:w-64 inline"
+                            src={API_ROUTE + subscription.supplier.medias[0]?.path}
                             alt={subscription.supplier.medias[0]?.title}
                         />
                     </div>
@@ -63,7 +76,19 @@ function Id() {
                                 Next payment date : {subscription?.subscribed_at}
                             </p>
                         </div>
+                        <div className="mt-4 flex flex-row gap-2">
+                            <Button className="w-fit" type={"submit"}
+                                    onClick={() => router.push("/subscriptions/" + router.query.id + "/edit")}>
+                                Edit
+                            </Button>
+                            <Button className="w-fit bg-secondary hover:bg-secondary-dark" type={"submit"}
+                                    onClick={() => router.push("/subscriptions/" + router.query.id + "?showDeleteModal=true")}>
+                                Delete
+                            </Button>
+                        </div>
                     </div>
+                    {router.query.showDeleteModal ? <DeleteModal delete={() => destroy()}
+                                                                 cancel={() => router.push("/subscriptions/" + router.query.id)} /> : null}
                 </div>
                 : <Loader />}</Container>
         </AppLayout>
