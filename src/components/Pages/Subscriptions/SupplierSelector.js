@@ -1,21 +1,39 @@
 import H2 from "@/components/H2";
 import BlockButton from "@/components/BlockButton";
 import React from "react";
-import SubscriptionForm from "@/components/Pages/Subscriptions/SubscriptionForm";
+import { API_ROUTE } from "@/api/api";
+import Button from "@/components/Button";
+import { router } from "next/client";
 
 function SupplierSelector(props) {
+
+    function back() {
+        props.back('SupplierSelector');
+    }
+
     return (<div>
-        <H2 className="mb-4">Choose the right supplier</H2>
+        <div className='flex flex-row justify-between mb-4'>
+            <H2>Choose the right supplier</H2>
+            <Button type={'button'} onClick={() => back()}>{'<'} Back</Button>
+        </div>
         <div className="grid grid-cols-4 gap-4">
             {props.suppliers.map(supplier => (<BlockButton
                 key={supplier.id}
                 onClick={() => props.setSelectedSupplier(supplier)}>
                 <img
-                    className="h-24 w-24 bg-primary"
-                    alt={supplier.title}
+                    className="h-24 w-24 object-contain" src={API_ROUTE + supplier.medias[0]?.path}
+                    alt={supplier.medias[0]?.title}
                 />
                 {supplier.title}
             </BlockButton>))}
+            <BlockButton
+                onClick={() => router.push('/categories/' + props.selectedCategoryId + '/suppliers/add')}>
+                <img
+                    className="h-24 w-24 object-contain" src={API_ROUTE + 'svg/plus.svg'}
+                    alt={'plus.svg'}
+                />
+                New
+            </BlockButton>
         </div>
     </div>);
 }

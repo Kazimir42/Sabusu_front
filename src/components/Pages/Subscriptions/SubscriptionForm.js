@@ -5,11 +5,20 @@ import { frequencyEnum } from "@/enums/frequencies";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import React from "react";
+import { API_ROUTE } from "@/api/api";
 
 function SubscriptionForm(props) {
+
+    function back() {
+        props.back("SubscriptionForm");
+    }
+
     return (
         <form onSubmit={props.handleFormSubmit}>
-            <H2 className="mb-4">Complete your subscription</H2>
+            <div className="flex flex-row justify-between mb-4">
+                <H2>Complete your subscription</H2>
+                <Button type={"button"} onClick={() => back()}>{"<"} Back</Button>
+            </div>
             <div className="flex flex-col gap-8">
                 <div>
                     <H3 className="mb-2">Frequency</H3>
@@ -19,7 +28,7 @@ function SubscriptionForm(props) {
                             onClick={() => props.setSelectedFrequency(frequency)}
                             className={props.selectedFrequency === frequency ? "border-2 border-primary" : ""}>
                             <img
-                                className="h-24 w-24 bg-primary"
+                                className="h-24 w-24" src={API_ROUTE + "frequency/" + frequency + ".png"}
                                 alt={frequencyEnum[frequency].title}
                             />
                             {frequencyEnum[frequency].title}

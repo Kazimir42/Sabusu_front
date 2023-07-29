@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { fetchSubscription } from "@/api/subscriptions";
 import { frequencyEnum } from "@/enums/frequencies";
 import H1 from "@/components/H1";
+import { API_ROUTE } from "@/api/api";
 
 function Id() {
     const [subscription, setSubscription] = useState(null);
@@ -33,19 +34,28 @@ function Id() {
             <Container>{!isLoading ?
                 <div className={"flex flex-row gap-8"}>
                     <div className=" ">
-                        <img className="h-64 w-64 bg-primary" />
+                        <img
+                            className="h-64 w-64 inline" src={API_ROUTE + subscription.supplier.medias[0]?.path}
+                            alt={subscription.supplier.medias[0]?.title}
+                        />
                     </div>
                     <div className="flex flex-col gap-2 my-auto ">
-                        <p className="text-gray-600">
-                            {subscription?.category?.title} | {" "}
-                            {subscription?.supplier?.title}
-                        </p>
+                        <div className="text-gray-600 flex flex-row items-center gap-1">
+                            <img
+                                className="h-5 w-5 inline" src={API_ROUTE + subscription.category.medias[0]?.path}
+                                alt={subscription.category.medias[0]?.title}
+                            />
+                            <p>
+                                {subscription.category.title} |{" "}
+                                {subscription.supplier.title}
+                            </p>
+                        </div>
                         <H1>{subscription?.title}</H1>
                         <p className="col-span-2 font-bold text-2xl text-primary-light">
                             {subscription?.amount}€ /
                             {frequencyEnum[subscription?.frequency].title}
                         </p>
-                        <div className={'mt-8'}>
+                        <div className={"mt-8"}>
                             <p className="text-gray-600">
                                 Subscribed date : {subscription?.subscribed_at}
                             </p>

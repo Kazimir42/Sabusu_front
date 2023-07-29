@@ -1,7 +1,6 @@
 import axios from "axios";
 import { console } from "next/dist/compiled/@edge-runtime/primitives/console";
-
-const csrf = () => axios.get('/sanctum/csrf-cookie')
+import { getApiTokenFromCookie } from "@/api/api";
 
 export function fetchSubscriptions() {
     return axios
@@ -38,7 +37,7 @@ export function fetchSubscription(id) {
 }
 
 export function createSubscription(subscription) {
-    const token = getApiTokenFromCookie(); // Remplacez getApiTokenFromCookie() par la fonction pour obtenir le jeton API du cookie
+    const token = getApiTokenFromCookie();
 
     return axios
         .post("http://localhost/api/subscriptions", subscription, {
@@ -46,8 +45,8 @@ export function createSubscription(subscription) {
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "http://localhost:3000",
-                "Authorization": `Bearer ${token}`, // Inclure le jeton API dans l'en-tête Authorization
-            },
+                "Authorization": `Bearer ${token}`
+            }
         })
         .then(response => {
             return response.data;
@@ -57,18 +56,3 @@ export function createSubscription(subscription) {
         });
 }
 
-function getApiTokenFromCookie() {
-    const cookies = document.cookie.split(';');
-    let apiToken = null;
-
-    cookies.forEach(cookie => {
-        const cookieParts = cookie.trim().split('=');
-        const cookieName = cookieParts[0];
-
-        if (cookieName === 'laravel_session') {
-            apiToken = cookieParts[1];
-        }
-    });
-
-    return apiToken;
-}

@@ -16,6 +16,8 @@ function Add() {
     const [suppliers, setSuppliers] = useState([]);
     const [frequencies] = useState([1, 2, 3, 4]);
 
+    const [currentPage, setCurrentPage] = useState(1);
+
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSupplier, setSelectedSupplier] = useState(null);
     const [selectedFrequency, setSelectedFrequency] = useState(null);
@@ -26,7 +28,7 @@ function Add() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
         fetchCategories()
@@ -43,6 +45,13 @@ function Add() {
         }
     }, [selectedCategory]);
 
+
+    useEffect(() => {
+        if (router.query.categoryId) {
+            updateSelectedCategory({id: router.query.categoryId})
+        }
+    }, []);
+
     function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -53,11 +62,37 @@ function Add() {
             title: title,
             amount: amount,
             subscribed_at: subscribedAt,
-            payment_at: paymentAt,
-        }
+            payment_at: paymentAt
+        };
 
         createSubscription(subscription)
-            .then(() => router.push('/dashboard'))
+            .then(() => router.push("/dashboard"));
+    }
+
+    function back(from) {
+        switch (from) {
+            case "CategorySelector":
+                router.push("/subscriptions");
+                break;
+            case "SupplierSelector":
+                setCurrentPage(1);
+                setSuppliers([]);
+                setSelectedSupplier(null);
+                break;
+            case "SubscriptionForm":
+                setCurrentPage(2);
+                break;
+        }
+    }
+
+    function updateSelectedCategory(value) {
+        setSelectedCategory(value);
+        setCurrentPage(2);
+    }
+
+    function updateSelectedSupplier(value) {
+        setSelectedSupplier(value);
+        setCurrentPage(3);
     }
 
     return (<AppLayout
@@ -70,16 +105,18 @@ function Add() {
 
         <Container>
             {!isLoading ? (<>
-                {!selectedCategory ?
-                    <CategorySelector categories={categories} setSelectedCategory={setSelectedCategory} /> : null}
-                {selectedCategory && !selectedSupplier ? (
-                    <SupplierSelector suppliers={suppliers} setSelectedSupplier={setSelectedSupplier} />) : null}
-                {selectedCategory && selectedSupplier ? (
+                {currentPage === 1 ?
+                    <CategorySelector categories={categories} setSelectedCategory={updateSelectedCategory}
+                                      back={back} /> : null}
+                {currentPage === 2 ? (
+                    <SupplierSelector suppliers={suppliers} setSelectedSupplier={updateSelectedSupplier} selectedCategoryId={selectedCategory.id}
+                                      back={back} />) : null}
+                {currentPage === 3 ? (
                     <SubscriptionForm frequencies={frequencies} selectedFrequency={selectedFrequency}
                                       setSelectedFrequency={setSelectedFrequency} title={title} setTitle={setTitle}
                                       amount={amount} setAmount={setAmount} subscribedAt={subscribedAt}
                                       setSubscribedAt={setSubscribedAt} paymentAt={paymentAt}
-                                      setPaymentAt={setPaymentAt} handleFormSubmit={handleFormSubmit}/>
+                                      setPaymentAt={setPaymentAt} handleFormSubmit={handleFormSubmit} back={back} />
                 ) : null}
             </>) : (<Loader />)}
         </Container>
