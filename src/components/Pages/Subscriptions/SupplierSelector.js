@@ -3,9 +3,10 @@ import BlockButton from "@/components/BlockButton";
 import React from "react";
 import { API_ROUTE } from "@/api/api";
 import Button from "@/components/Button";
-import { router } from "next/client";
+import { useRouter } from "next/router";
 
 function SupplierSelector(props) {
+    const router = useRouter();
 
     function back() {
         props.back('SupplierSelector');

@@ -31,7 +31,6 @@ export function createSupplier(categoryId, supplier) {
                 "Access-Control-Allow-Origin": "http://localhost:3000",
                 "Authorization": `Bearer ${token}`
             },
-            body: supplier
         })
         .then(response => {
             return response.data;

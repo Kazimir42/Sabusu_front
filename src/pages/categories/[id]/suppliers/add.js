@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AppLayout from "@/components/Layouts/AppLayout";
 import Head from "next/head";
 import Container from "@/components/Container";
-import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
 import { createSupplier } from "@/api/suppliers";
 import H2 from "@/components/H2";
@@ -13,17 +12,23 @@ import Input from "@/components/Input";
 function Add() {
     const router = useRouter();
 
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState("");
+    const [image, setImage] = useState(null);
+
+    function handleImageChange(event) {
+        const file = event.target.files[0];
+        setImage(file);
+    }
 
     function handleFormSubmit(event) {
         event.preventDefault();
 
-        const supplier = {
-            title: title
-        };
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("image", image);
 
-        createSupplier(router.query.id, supplier)
-            .then(() => router.push({ pathname: "/subscriptions/add", query: {categoryId: router.query.id}}));
+        createSupplier(router.query.id, formData)
+            .then(() => router.push({ pathname: "/subscriptions/add", query: { categoryId: router.query.id } }));
     }
 
     return (<AppLayout
@@ -52,6 +57,9 @@ function Add() {
                             required={true}
                             onChange={event => setTitle(event.target.value)}
                         />
+                    </div>
+                    <div className="w-1/2">
+                        <input type="file" onChange={handleImageChange} />
                     </div>
                     <Button className="w-fit py-4 px-8 text-lg" type={"submit"}>
                         Create

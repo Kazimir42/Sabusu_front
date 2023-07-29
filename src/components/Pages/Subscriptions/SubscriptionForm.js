@@ -28,7 +28,7 @@ function SubscriptionForm(props) {
                             onClick={() => props.setSelectedFrequency(frequency)}
                             className={props.selectedFrequency === frequency ? "border-2 border-primary" : ""}>
                             <img
-                                className="h-24 w-24" src={API_ROUTE + "frequency/" + frequency + ".png"}
+                                className="h-24 w-24" src={API_ROUTE + "images/frequency/" + frequency + ".png"}
                                 alt={frequencyEnum[frequency].title}
                             />
                             {frequencyEnum[frequency].title}

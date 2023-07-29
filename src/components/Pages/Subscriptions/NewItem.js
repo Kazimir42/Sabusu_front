@@ -6,12 +6,12 @@ import BlockButton from "@/components/BlockButton";
 function NewItem(props) {
     return (
         <Link href="/subscriptions/add">
-            <BlockButton className=" border-dashed border-primary-light w-full grid grid-cols-12 border-2">
+            <BlockButton className=" border-dashed border-primary w-full grid grid-cols-12 border-2">
                 <div className=" col-span-2 mx-auto my-auto">
-                    <Plus className={"h-12 w-12 text-primary-light"} />
+                    <Plus className={"h-12 w-12 text-primary"} />
                 </div>
                 <div className=" flex flex-col gap-2 col-span-10 justify-center">
-                    <p className=" font-bold text-2xl text-primary-light text-left">
+                    <p className=" font-bold text-2xl text-primary text-left">
                         Add new subscription
                     </p>
                 </div>
