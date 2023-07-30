@@ -39,17 +39,17 @@ const Index = () => {
         return (
             <div className={"grid grid-cols-2 md:grid-cols-3 gap-4 mb-4"}>
                 <Block
-                    className={"col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8"}>
+                    className={"col-span-1 flex flex-col text-center justify-center p-8"}>
                     <p className={"font-bold text-primary text-6xl md:text-7xl"}>{subscriptions?.length ?? 0}</p>
                     <p>Subscriptions</p>
                 </Block>
                 <Block
-                    className={"col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8"}>
+                    className={"col-span-1 flex flex-col text-center justify-center p-8"}>
                     <p className={"font-bold text-primary text-6xl md:text-7xl"}>{totalMonthlyCost ?? 0}€</p>
                     <p>Monthly cost</p>
                 </Block>
                 <Block
-                    className={"col-span-2 md:col-span-1 flex flex-col hover:border-primary duration-200 text-center justify-center p-8"}>
+                    className={"col-span-2 md:col-span-1 flex flex-col text-center justify-center p-8"}>
                     <p className={"font-bold text-primary text-3xl md:text-3xl lg:text-4xl xl:text-5xl"}>{mostExpensiveCategory?.title ?? 'None'}</p>
                     <p>Most expensive category</p>
                 </Block>

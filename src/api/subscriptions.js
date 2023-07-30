@@ -18,6 +18,23 @@ export function fetchSubscriptions() {
         });
 }
 
+export function fetchSubscriptionsDatas() {
+    return axios
+        .get("http://localhost/api/subscriptions/datas", {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:3000"
+            }
+        })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return Promise.reject(error.response.data.errors);
+        });
+}
+
 export function fetchSubscription(id) {
     return axios
         .get("http://localhost/api/subscriptions/" + id, {

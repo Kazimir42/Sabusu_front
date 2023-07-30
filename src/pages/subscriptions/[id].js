@@ -49,7 +49,7 @@ function Id() {
                     <div className="flex flex-row justify-between mb-4">
                         <H2>Your subscription</H2>
                         <Button type={"button"}
-                                onClick={() => router.push("/dashboard")}>{"<"} Back</Button>
+                                onClick={() => router.back()}>{"<"} Back</Button>
                     </div>
                     <div className={"flex flex-row gap-8"}>
                         <div className=" ">

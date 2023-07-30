@@ -75,7 +75,7 @@ function edit() {
             <Container>{!isLoading ?
                 <form onSubmit={handleFormSubmit}>
                     <div className="flex flex-row justify-between mb-4">
-                        <H2>Complete your subscription</H2>
+                        <H2>Edit your subscription</H2>
                         <Button type={"button"} onClick={() => router.push('/subscriptions/' + router.query.id)}>{"<"} Back</Button>
                     </div>
                     <div className="flex flex-col gap-8">

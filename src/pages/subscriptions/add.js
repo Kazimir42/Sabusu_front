@@ -73,7 +73,7 @@ function Add() {
     function back(from) {
         switch (from) {
             case "CategorySelector":
-                router.push("/subscriptions");
+                router.push("/dashboard");
                 break;
             case "SupplierSelector":
                 setCurrentPage(1);
