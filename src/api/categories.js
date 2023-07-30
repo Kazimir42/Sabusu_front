@@ -13,7 +13,7 @@ export function fetchCategories() {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }
 
@@ -30,6 +30,6 @@ export function fetchCategoriesForUser(userId) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }

@@ -16,7 +16,7 @@ function SuppliersList(props) {
                         key={supplier.id}
                         onClick={() => router.push('my-profile/suppliers/' + supplier.id)}>
                         <img
-                            className="h-20 w-20" src={API_ROUTE + (supplier.medias[0]?.path ?? 'svg/puzzle.svg')}
+                            className="h-24 w-24 object-contain" src={API_ROUTE + (supplier.medias[0]?.path ?? 'svg/puzzle.svg')}
                             alt={supplier.medias[0]?.title}
                         />
                         {supplier.title}

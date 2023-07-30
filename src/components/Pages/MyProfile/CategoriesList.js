@@ -16,7 +16,7 @@ function CategoriesList(props) {
                         key={category.id}
                         onClick={() => router.push('my-profile/categories/' + category.id)}>
                         <img
-                            className="h-20 w-20" src={API_ROUTE + category.medias[0]?.path}
+                            className="h-24 w-24 object-contain" src={API_ROUTE + category.medias[0]?.path}
                             alt={category.medias[0]?.title}
                         />
                         {category.title}

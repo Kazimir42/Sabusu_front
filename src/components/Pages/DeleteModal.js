@@ -5,7 +5,7 @@ import H2 from "@/components/H2";
 
 function DeleteModal(props) {
     return (
-        <Modal>
+        <Modal onClose={props.cancel}>
             <H2>Are you sure?</H2>
             <p className="text-gray-500 w-full">
                 {props.description}

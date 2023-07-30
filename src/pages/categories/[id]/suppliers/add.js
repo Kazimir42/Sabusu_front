@@ -8,9 +8,12 @@ import H2 from "@/components/H2";
 import Button from "@/components/Button";
 import H3 from "@/components/H3";
 import Input from "@/components/Input";
+import ErrorsModal from "@/components/Pages/ErrorsModal";
 
 function Add() {
     const router = useRouter();
+
+    const [errors, setErrors] = useState(null);
 
     const [title, setTitle] = useState("");
     const [image, setImage] = useState(null);
@@ -28,7 +31,7 @@ function Add() {
         formData.append("image", image);
 
         createSupplier(router.query.id, formData)
-            .then(() => router.push({ pathname: "/subscriptions/add", query: { categoryId: router.query.id } }));
+            .then(() => router.push({ pathname: "/subscriptions/add", query: { categoryId: router.query.id } })).catch((errors) => setErrors(errors));
     }
 
     return (<AppLayout
@@ -66,6 +69,7 @@ function Add() {
                     </Button>
                 </div>
             </form>
+            {errors ? <ErrorsModal errors={errors} close={() => setErrors(null)} /> : null}
         </Container>
     </AppLayout>);
 }

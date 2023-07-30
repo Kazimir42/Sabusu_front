@@ -10,6 +10,7 @@ import H1 from "@/components/H1";
 import { API_ROUTE } from "@/api/api";
 import Button from "@/components/Button";
 import DeleteModal from "@/components/Pages/DeleteModal";
+import H2 from "@/components/H2";
 
 function Id() {
     const [subscription, setSubscription] = useState(null);
@@ -44,52 +45,61 @@ function Id() {
             </Head>
 
             <Container>{!isLoading ?
-                <div className={"flex flex-row gap-8"}>
-                    <div className=" ">
-                        <img
-                            className="h-40 w-40 md:h-64 md:w-64 inline"
-                            src={API_ROUTE + (subscription.supplier.medias[0]?.path ?? 'svg/puzzle.svg')}
-                            alt={subscription.supplier.medias[0]?.title ?? 'puzzle.svg'}
-                        />
+                <>
+                    <div className="flex flex-row justify-between mb-4">
+                        <H2>Your subscription</H2>
+                        <Button type={"button"}
+                                onClick={() => router.push("/dashboard")}>{"<"} Back</Button>
                     </div>
-                    <div className="flex flex-col gap-2 my-auto ">
-                        <div className="text-gray-600 flex flex-row items-center gap-1">
+                    <div className={"flex flex-row gap-8"}>
+                        <div className=" ">
                             <img
-                                className="h-5 w-5 inline" src={API_ROUTE + subscription.category.medias[0]?.path}
-                                alt={subscription.category.medias[0]?.title}
+                                className="h-40 w-40 md:h-64 md:w-64 inline"
+                                src={API_ROUTE + (subscription.supplier.medias[0]?.path ?? "svg/puzzle.svg")}
+                                alt={subscription.supplier.medias[0]?.title ?? "puzzle.svg"}
                             />
-                            <p>
-                                {subscription.category.title} |{" "}
-                                {subscription.supplier.title}
-                            </p>
                         </div>
-                        <H1>{subscription?.title}</H1>
-                        <p className="col-span-2 font-bold text-2xl text-primary">
-                            {subscription?.amount}€ /
-                            {frequencyEnum[subscription?.frequency].title}
-                        </p>
-                        <div className={"mt-8"}>
-                            <p className="text-gray-600">
-                                Subscribed date : {subscription?.subscribed_at}
+                        <div className="flex flex-col gap-2 my-auto ">
+                            <div className="text-gray-600 flex flex-row items-center gap-1">
+                                <img
+                                    className="h-5 w-5 inline" src={API_ROUTE + subscription.category.medias[0]?.path}
+                                    alt={subscription.category.medias[0]?.title}
+                                />
+                                <p>
+                                    {subscription.category.title} |{" "}
+                                    {subscription.supplier.title}
+                                </p>
+                            </div>
+                            <H1>{subscription?.title}</H1>
+                            <p className="col-span-2 font-bold text-2xl text-primary">
+                                {subscription?.amount}€ /
+                                {frequencyEnum[subscription?.frequency].title}
                             </p>
-                            <p className="text-gray-600">
-                                Next payment date : {subscription?.payment_at}
-                            </p>
+                            <div className={"mt-8"}>
+                                <p className="text-gray-600">
+                                    Subscribed date : {subscription?.subscribed_at}
+                                </p>
+                                <p className="text-gray-600">
+                                    Next payment date : {subscription?.payment_at}
+                                </p>
+                            </div>
+                            <div className="mt-4 flex flex-row gap-2">
+                                <Button className="w-fit" type={"submit"}
+                                        onClick={() => router.push("/subscriptions/" + router.query.id + "/edit")}>
+                                    Edit
+                                </Button>
+                                <Button className="w-fit bg-secondary hover:bg-secondary-dark" type={"submit"}
+                                        onClick={() => router.push("/subscriptions/" + router.query.id + "?showDeleteModal=true")}>
+                                    Delete
+                                </Button>
+                            </div>
                         </div>
-                        <div className="mt-4 flex flex-row gap-2">
-                            <Button className="w-fit" type={"submit"}
-                                    onClick={() => router.push("/subscriptions/" + router.query.id + "/edit")}>
-                                Edit
-                            </Button>
-                            <Button className="w-fit bg-secondary hover:bg-secondary-dark" type={"submit"}
-                                    onClick={() => router.push("/subscriptions/" + router.query.id + "?showDeleteModal=true")}>
-                                Delete
-                            </Button>
-                        </div>
+                        {router.query.showDeleteModal ? <DeleteModal delete={() => destroy()}
+                                                                     description={"You will lost all your history for this subscription"}
+                                                                     cancel={() => router.push("/subscriptions/" + router.query.id)} /> : null}
                     </div>
-                    {router.query.showDeleteModal ? <DeleteModal delete={() => destroy()} description={'You will lost all your history for this subscription'}
-                                                                 cancel={() => router.push("/subscriptions/" + router.query.id)} /> : null}
-                </div>
+                </>
+
                 : <Loader />}</Container>
         </AppLayout>
     );

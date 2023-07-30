@@ -70,7 +70,7 @@ export function fetchSupplierForUser(userId, id) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }
 
@@ -91,6 +91,6 @@ export function deleteSupplierForUser(userId, id) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }

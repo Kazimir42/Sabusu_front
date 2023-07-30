@@ -6,13 +6,13 @@ import Loader from "@/components/Loader";
 import { useRouter } from "next/router";
 import { editSubscription, fetchSubscription } from "@/api/subscriptions";
 import { frequencyEnum } from "@/enums/frequencies";
-import H1 from "@/components/H1";
 import { API_ROUTE } from "@/api/api";
 import Button from "@/components/Button";
 import H2 from "@/components/H2";
 import H3 from "@/components/H3";
 import BlockButton from "@/components/BlockButton";
 import Input from "@/components/Input";
+import ErrorsModal from "@/components/Pages/ErrorsModal";
 
 function edit() {
     const [frequencies] = useState([1, 2, 3, 4]);
@@ -25,6 +25,8 @@ function edit() {
     const [paymentAt, setPaymentAt] = useState("");
 
     const [isLoading, setIsLoading] = useState(true);
+    const [errors, setErrors] = useState(null);
+
     const router = useRouter();
 
     useEffect(() => {
@@ -45,7 +47,7 @@ function edit() {
         };
 
         editSubscription(router.query.id, subscription)
-            .then(() => router.push("/subscriptions/" + router.query.id));
+            .then(() => router.push("/subscriptions/" + router.query.id)).catch((errors) => setErrors(errors));
     }
 
 
@@ -155,6 +157,7 @@ function edit() {
                             Edit
                         </Button>
                     </div>
+                    {errors ? <ErrorsModal errors={errors} close={() => setErrors(null)} /> : null}
                 </form>
                 : <Loader />}</Container>
         </AppLayout>

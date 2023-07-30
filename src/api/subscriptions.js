@@ -1,5 +1,4 @@
 import axios from "axios";
-import { console } from "next/dist/compiled/@edge-runtime/primitives/console";
 import { getApiTokenFromCookie } from "@/api/api";
 
 export function fetchSubscriptions() {
@@ -15,7 +14,7 @@ export function fetchSubscriptions() {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }
 
@@ -32,7 +31,7 @@ export function fetchSubscription(id) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }
 
@@ -52,7 +51,7 @@ export function createSubscription(subscription) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }
 
@@ -72,8 +71,9 @@ export function editSubscription(subscriptionId, subscription) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
+
 }
 
 export function deleteSubscription(id) {
@@ -92,7 +92,7 @@ export function deleteSubscription(id) {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            return Promise.reject(error.response.data.errors);
         });
 }
 

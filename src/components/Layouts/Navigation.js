@@ -38,11 +38,11 @@ const Navigation = ({ user }) => {
                                 Dashboard
                             </NavLink>
                             <NavLink
-                                href="/subscriptions"
+                                href="/statistics"
                                 active={router.pathname.includes(
-                                    '/subscriptions',
+                                    '/statistics',
                                 )}>
-                                Subscriptions
+                                Statistics
                             </NavLink>
                         </div>
                     </div>

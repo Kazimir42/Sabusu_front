@@ -10,6 +10,7 @@ import SupplierSelector from "@/components/Pages/Subscriptions/SupplierSelector"
 import CategorySelector from "@/components/Pages/Subscriptions/CategorySelector";
 import { createSubscription } from "@/api/subscriptions";
 import { useRouter } from "next/router";
+import ErrorsModal from "@/components/Pages/ErrorsModal";
 
 function Add() {
     const [categories, setCategories] = useState([]);
@@ -27,6 +28,7 @@ function Add() {
     const [paymentAt, setPaymentAt] = useState("");
 
     const [isLoading, setIsLoading] = useState(true);
+    const [errors, setErrors] = useState(null);
 
     const router = useRouter();
 
@@ -44,7 +46,6 @@ function Add() {
                 .then(() => setIsLoading(false));
         }
     }, [selectedCategory, currentPage]);
-
 
     useEffect(() => {
         if (router.query.categoryId) {
@@ -66,7 +67,7 @@ function Add() {
         };
 
         createSubscription(subscription)
-            .then(() => router.push("/dashboard"));
+            .then(() => router.push("/dashboard")).catch((errors) => setErrors(errors));
     }
 
     function back(from) {
@@ -119,6 +120,7 @@ function Add() {
                                       setPaymentAt={setPaymentAt} handleFormSubmit={handleFormSubmit} back={back} />
                 ) : null}
             </>) : (<Loader />)}
+            {errors ? <ErrorsModal errors={errors} close={() => setErrors(null)} /> : null}
         </Container>
     </AppLayout>);
 }
