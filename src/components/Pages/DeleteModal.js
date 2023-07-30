@@ -8,7 +8,7 @@ function DeleteModal(props) {
         <Modal>
             <H2>Are you sure?</H2>
             <p className="text-gray-500 w-full">
-                You will lost all your history for this subscription
+                {props.description}
             </p>
             <div className='mt-8 flex flex-row gap-2'>
                 <Button className="w-fit bg-secondary hover:bg-secondary-dark" type={"button"} onClick={props.cancel}>

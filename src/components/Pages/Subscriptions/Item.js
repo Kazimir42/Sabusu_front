@@ -10,8 +10,8 @@ function Item(props) {
             <BlockButton key={props.index} className="grid grid-cols-12 text-left w-full border-2">
                 <div className="col-span-3 md:col-span-2 mx-auto my-auto">
                     <img
-                        className="h-24 w-24 inline" src={API_ROUTE + props.subscription.supplier.medias[0]?.path}
-                        alt={props.subscription.supplier.medias[0]?.title}
+                        className="h-24 w-24 inline" src={API_ROUTE + (props.subscription.supplier.medias[0]?.path ?? 'svg/puzzle.svg')}
+                        alt={props.subscription.supplier.medias[0]?.title ?? 'puzzle.svg'}
                     />
                 </div>
                 <div className="flex flex-col gap-2 col-span-6 md:col-span-8 justify-between">

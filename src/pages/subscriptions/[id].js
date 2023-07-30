@@ -48,8 +48,8 @@ function Id() {
                     <div className=" ">
                         <img
                             className="h-40 w-40 md:h-64 md:w-64 inline"
-                            src={API_ROUTE + subscription.supplier.medias[0]?.path}
-                            alt={subscription.supplier.medias[0]?.title}
+                            src={API_ROUTE + (subscription.supplier.medias[0]?.path ?? 'svg/puzzle.svg')}
+                            alt={subscription.supplier.medias[0]?.title ?? 'puzzle.svg'}
                         />
                     </div>
                     <div className="flex flex-col gap-2 my-auto ">
@@ -73,7 +73,7 @@ function Id() {
                                 Subscribed date : {subscription?.subscribed_at}
                             </p>
                             <p className="text-gray-600">
-                                Next payment date : {subscription?.subscribed_at}
+                                Next payment date : {subscription?.payment_at}
                             </p>
                         </div>
                         <div className="mt-4 flex flex-row gap-2">
@@ -87,7 +87,7 @@ function Id() {
                             </Button>
                         </div>
                     </div>
-                    {router.query.showDeleteModal ? <DeleteModal delete={() => destroy()}
+                    {router.query.showDeleteModal ? <DeleteModal delete={() => destroy()} description={'You will lost all your history for this subscription'}
                                                                  cancel={() => router.push("/subscriptions/" + router.query.id)} /> : null}
                 </div>
                 : <Loader />}</Container>

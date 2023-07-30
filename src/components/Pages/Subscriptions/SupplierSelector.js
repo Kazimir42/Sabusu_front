@@ -22,8 +22,8 @@ function SupplierSelector(props) {
                 key={supplier.id}
                 onClick={() => props.setSelectedSupplier(supplier)}>
                 <img
-                    className="h-24 w-24 object-contain" src={API_ROUTE + supplier.medias[0]?.path}
-                    alt={supplier.medias[0]?.title}
+                    className="h-24 w-24 object-contain" src={API_ROUTE + (supplier.medias[0]?.path ?? 'svg/puzzle.svg')}
+                    alt={supplier.medias[0]?.title ?? 'puzzle.svg'}
                 />
                 {supplier.title}
             </BlockButton>))}

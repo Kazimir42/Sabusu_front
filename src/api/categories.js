@@ -16,3 +16,20 @@ export function fetchCategories() {
             console.error(error);
         });
 }
+
+export function fetchCategoriesForUser(userId) {
+    return axios
+        .get("http://localhost/api/users/" + userId + "/categories", {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:3000"
+            }
+        })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}

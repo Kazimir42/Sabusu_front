@@ -56,6 +56,26 @@ export function createSubscription(subscription) {
         });
 }
 
+export function editSubscription(subscriptionId, subscription) {
+    const token = getApiTokenFromCookie();
+
+    return axios
+        .put("http://localhost/api/subscriptions/" + subscriptionId, subscription, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:3000",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
 export function deleteSubscription(id) {
     const token = getApiTokenFromCookie();
 
