@@ -38,7 +38,7 @@ const Register = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                        <ApplicationLogo className={'h-32 w-32'} />
                     </Link>
                 }>
                 <form onSubmit={submitForm}>

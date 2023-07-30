@@ -1,17 +1,19 @@
-const NotFoundPage = () => (
-    <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div className="max-w-xl mx-auto sm:px-6 lg:px-8">
-            <div className="flex items-center pt-8 sm:justify-start sm:pt-0">
-                <div className="px-4 text-lg text-gray-500 border-r border-gray-400 tracking-wider">
-                    404
-                </div>
+import GuestLayout from "@/components/Layouts/GuestLayout";
+import H1 from "@/components/H1";
+import Button from "@/components/Button";
+import { useRouter } from "next/router";
 
-                <div className="ml-4 text-lg text-gray-500 uppercase tracking-wider">
-                    Not Found
-                </div>
+function NotFoundPage() {
+    const router = useRouter();
+
+    return (
+        <GuestLayout className={"h-screen flex flex-col"}>
+            <div className={"mx-auto my-auto justify-center items-center flex flex-col gap-4"}>
+                <H1 className={"text-primary text-7xl"}>404</H1>
+                <Button onClick={() => router.back()} className={'mx-auto text-center'}>{'<'} Back</Button>
             </div>
-        </div>
-    </div>
-)
+        </GuestLayout>
+    );
+}
 
-export default NotFoundPage
+export default NotFoundPage;

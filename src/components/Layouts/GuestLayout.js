@@ -1,14 +1,14 @@
 import Head from 'next/head'
 
-const GuestLayout = ({ children }) => {
+const GuestLayout = (props) => {
     return (
         <div>
             <Head>
                 <title>Laravel</title>
             </Head>
 
-            <div className="font-sans text-gray-900 antialiased">
-                {children}
+            <div className={"font-sans text-gray-900 antialiased " + props.className}>
+                {props.children}
             </div>
         </div>
     )
